@@ -10,7 +10,7 @@ You can install and run this as a global module:
 
 ```
 npm i -g jass-to-ts
-jassToTs path/to/war3map.j > war3map.ts
+jass-to-ts path/to/war3map.j > war3map.ts
 ```
 
 ## Clean up
