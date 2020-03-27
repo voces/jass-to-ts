@@ -1,6 +1,6 @@
 {
   "name": "jass-to-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/jassToTS.js",
   "scripts": {
@@ -40,5 +40,13 @@
   "type": "module",
   "files": [
     "dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voces/jass-to-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voces/jass-to-ts/issues"
+  },
+  "homepage": "https://github.com/voces/jass-to-ts#readme"
 }
