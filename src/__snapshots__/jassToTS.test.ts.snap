@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`globals 1`] = `
+"
+// my numbers
+const testNumber = 7.12;
+
+// my strings
+let testString = \\"myString\\";
+
+// stress tests
+let myUnits: Array<unit> = [];
+"
+`;
+
+exports[`simple 1`] = `
+"// comment
+let udg_blah: unit;
+
+const myFunc = ( i: number, b: boolean ): void => {
+
+	let someUnit = GetSummonedUnit();
+
+	if ( unit === null ) {
+
+		unit = CreateUnit( Player( 0 ), FourCC( \\"hfoo\\" ), 0, 0, 0 );
+		udg_blah = unit;
+
+	}
+
+
+	if ( R2I( GetUnitX( unit ) ) < i ) {
+
+		ShowUnit( unit, b )
+
+	}
+
+
+	while ( true ) {
+
+		if ( i > 10 ) break;
+		i = i + 1;
+
+	}
+
+
+
+};
+"
+`;
