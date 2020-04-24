@@ -1,5 +1,5 @@
 # jass-to-ts
-Converts JASS into TypeScript.
+Converts JASS into TypeScript. Available online at https://voces.github.io/jass-to-ts/
 
 Generated code should mostly be valid, though will require manual cleanup to
 fix nulled handles. In most cases this means you can just delete the offending
