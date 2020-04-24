@@ -56,7 +56,7 @@ testProgram( "globals", `
 		// stress tests
 		unit  array    myUnits //tehe
 
-	endglobals 
+	endglobals
 ` );
 
 testProgram( "simple", `
@@ -78,5 +78,10 @@ testProgram( "simple", `
 			exitwhen i > 10
 			set i = i + 1
 		endloop
+	endfunction
+` );
+
+testProgram( "empty function", `
+	function InitGlobals takes nothing returns nothing
 	endfunction
 ` );

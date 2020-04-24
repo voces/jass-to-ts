@@ -107,7 +107,8 @@ const astToTS = ( ast: Node | List<Node> | SingleProp | string ): string => {
 
 			if ( ( ast as JASSFunction ).returns === undefined )
 				isVoid = true;
-			const r = `const ${( ast as JASSFunction ).name} = (${( ast as JASSFunction ).params ? ` ${[ ...( ast as JASSFunction ).params ].map( astToTS ).join( ", " )} ` : ""}): ${jassTypeToTypeScriptType( ( ast as JASSFunction ).returns || "void" )} => {\n\n${astToTS( ( ast as JASSFunction ).statements )}\n\n};\n`;
+			const body = ( ast as JASSFunction ).statements ? `\n\n${astToTS( ( ast as JASSFunction ).statements )}\n\n` : "";
+			const r = `const ${( ast as JASSFunction ).name} = (${( ast as JASSFunction ).params ? ` ${[ ...( ast as JASSFunction ).params ].map( astToTS ).join( ", " )} ` : ""}): ${jassTypeToTypeScriptType( ( ast as JASSFunction ).returns || "void" )} => {${body}};\n`;
 			isVoid = false;
 			return r;
 

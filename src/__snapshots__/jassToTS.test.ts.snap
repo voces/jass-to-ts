@@ -1,5 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`empty function 1`] = `
+"const InitGlobals = (): void => {};
+"
+`;
+
 exports[`globals 1`] = `
 "
 // my numbers

@@ -1,12 +1,12 @@
 {
   "name": "jass-to-ts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/jassToTS.js",
   "module": "dist/jassToTS.js",
   "scripts": {
     "test": "jest",
-    "test-debug": "node --inspect-brk node_modules/.bin/jest",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest",
     "test:watch": "jest --watch",
     "coverage": "jest --collectCoverageFrom=src/**/*.ts --coverage",
     "build": "tsc",
