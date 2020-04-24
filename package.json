@@ -1,6 +1,6 @@
 {
   "name": "jass-to-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/jassToTS.js",
   "module": "dist/jassToTS.js",
