@@ -1,5 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`debug statements 1`] = `
+"const MyFunc = (): void => {};
+"
+`;
+
 exports[`empty function 1`] = `
 "const InitGlobals = (): void => {};
 "
@@ -18,33 +23,41 @@ let myUnits: Array<unit> = [];
 "
 `;
 
+exports[`multiline comments 1`] = `
+"/**
+ * Blah blah blah
+ * @param arg1 Blah blah blah
+ */
+"
+`;
+
 exports[`simple 1`] = `
-"// comment
+"//comment
 let udg_blah: unit;
 
 const myFunc = ( i: number, b: boolean ): void => {
 
 	let someUnit = GetSummonedUnit();
 
-	if ( unit === null ) {
+	if ( \\"unit\\" === null ) {
 
 		unit = CreateUnit( Player( 0 ), FourCC( \\"hfoo\\" ), 0, 0, 0 );
-		udg_blah = unit;
+		udg_blah = \\"unit\\";
 
 	}
 
 
-	if ( R2I( GetUnitX( unit ) ) < i ) {
+	if ( R2I( GetUnitX( \\"unit\\" ) ) < \\"i\\" ) {
 
-		ShowUnit( unit, b )
+		ShowUnit( \\"unit\\", \\"b\\" )
 
 	}
 
 
 	while ( true ) {
 
-		if ( i > 10 ) break;
-		i = i + 1;
+		if ( \\"i\\" > 10 ) break;
+		i = \\"i\\" + 1;
 
 	}
 

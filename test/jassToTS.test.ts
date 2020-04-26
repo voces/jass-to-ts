@@ -1,6 +1,6 @@
 /* eslint @typescript-eslint/explicit-function-return-type: 0 */
 
-import { jassToTS } from "./jassToTS";
+import { jassToTS } from "../src/jassToTS";
 
 const trimEmptyLines = ( str: string ) => {
 
@@ -25,7 +25,7 @@ const trimEmptyLines = ( str: string ) => {
 const trim = ( str: string ) => {
 
 	const lines = trimEmptyLines( str );
-	const match = lines.match( /^\W+/ );
+	const match = lines.match( /\s+/ );
 	if ( match ) {
 
 		const indent = match[ 0 ];
@@ -84,4 +84,17 @@ testProgram( "simple", `
 testProgram( "empty function", `
 	function InitGlobals takes nothing returns nothing
 	endfunction
+` );
+
+testProgram( "debug statements", `
+	function MyFunc takes nothing returns nothing
+		debug call BJDebugMsg("hello, world!")
+	endfunction
+` );
+
+testProgram( "multiline comments", `
+	/**
+	 * Blah blah blah
+	 * @param arg1 Blah blah blah
+	 */
 ` );
