@@ -97,4 +97,6 @@ testProgram( "multiline comments", `
 	 * Blah blah blah
 	 * @param arg1 Blah blah blah
 	 */
+	function MyFunc takes string arg1 returns nothing
+	endfunction
 ` );

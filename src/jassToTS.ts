@@ -46,8 +46,6 @@ const astToTS = ( ast: Node | List<Node> | SingleProp | string | boolean ): stri
 	if ( typeof ast === "number" || typeof ast === "boolean" )
 		return ast.toString();
 
-	// console.log( typeof ast, typeof ArrayRef );
-
 	if ( ast instanceof ArrayRef )
 		return `${ast.name}[ ${astToTS( ast.prop )} ]`;
 

@@ -28,6 +28,8 @@ exports[`multiline comments 1`] = `
  * Blah blah blah
  * @param arg1 Blah blah blah
  */
+
+const MyFunc = ( arg1: string ): void => {};
 "
 `;
 
