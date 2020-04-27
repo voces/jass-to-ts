@@ -83,9 +83,6 @@ const astToTS = ( ast: Node | List<Node> | SingleProp | string | boolean ): stri
 	if ( ast instanceof FourCC )
 		return `FourCC( "${ast}" )`;
 
-	if ( ast instanceof String || typeof ast === "string" )
-		return `"${ast}"`;
-
 	if ( ast instanceof FuncRef )
 		return ast.data;
 
@@ -163,6 +160,9 @@ const astToTS = ( ast: Node | List<Node> | SingleProp | string | boolean ): stri
 		return `${decl} ${name}${hasInferableValue ? "" : `: ${type}`}${value};`;
 
 	}
+
+	if ( ast instanceof String || typeof ast === "string" )
+		return `"${ast}"`;
 
 	if ( ast instanceof Debug )
 		return "";

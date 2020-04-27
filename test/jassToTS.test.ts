@@ -54,7 +54,7 @@ testProgram( "globals", `
 		string testString = "myString"
 
 		// stress tests
-		unit  array    myUnits //tehe
+		unit array myUnits //tehe
 
 	endglobals
 ` );
@@ -99,4 +99,11 @@ testProgram( "multiline comments", `
 	 */
 	function MyFunc takes string arg1 returns nothing
 	endfunction
+` );
+
+testProgram( "variables", `
+	globals
+		constant real bj_PI = 3.14159
+		constant real bj_RADTODEG = 180.0 / bj_PI
+	endglobals
 ` );
