@@ -1,7 +1,7 @@
 /* global hljs */
 
-import { jassToTS } from "https://cdn.pika.dev/jass-to-ts";
-import Pako from "https://cdn.pika.dev/pako";
+import { jassToTS } from "https://cdn.skypack.dev/jass-to-ts";
+import Pako from "https://cdn.skypack.dev/pako";
 
 const input = document.querySelector("textarea");
 const code = document.querySelector("code");
