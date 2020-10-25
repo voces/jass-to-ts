@@ -19,6 +19,5 @@
 	"lib": [ "es6" ],
 	"allowJs": true
   },
-  "include": [ "src" ],
-  "exclude": [ "**/*.test.ts" ]
+  "include": [ "src", "test" ]
 }
