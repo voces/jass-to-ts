@@ -43,7 +43,7 @@ const astToTS = (
 	if (typeof ast === "number" || typeof ast === "boolean")
 		return ast.toString();
 
-	if (ast instanceof ArrayRef) return `${ast.name}[ ${astToTS(ast.prop)} ]`;
+	if (ast instanceof ArrayRef) return `${ast.name}[${astToTS(ast.prop)}]`;
 
 	if (ast instanceof BinaryOp) {
 		const operator = ast.operator
@@ -62,12 +62,12 @@ const astToTS = (
 	if (ast instanceof Comment)
 		return ast.includes("\n") ? "/*" + ast + "*/" : "//" + ast;
 
-	if (ast instanceof Else) return `else {\n\n${astToTS(ast.statements)}\n\n}`;
+	if (ast instanceof Else) return `else {\n${astToTS(ast.statements)}\n}`;
 
 	if (ast instanceof ElseIf)
-		return `else if ( ${astToTS(ast.condition)} ) {\n\n${astToTS(
+		return `else if (${astToTS(ast.condition)}) {\n${astToTS(
 			ast.statements,
-		)}\n\n}`;
+		)}\n}`;
 
 	if (ast instanceof EmptyLine) return "";
 
@@ -130,7 +130,7 @@ const astToTS = (
 			"_this",
 		)}: ${jassTypeToTypeScriptType(ast.type)}`;
 
-	if (ast instanceof Parens) return `( ${astToTS(ast.data[0])} )`;
+	if (ast instanceof Parens) return `(${astToTS(ast.data[0])})`;
 
 	if (ast instanceof Program) return [...ast].map(astToTS).join("\n");
 
@@ -147,7 +147,7 @@ const astToTS = (
 			.join("\n");
 
 	if (ast instanceof UnaryOp)
-		return `${ast.operator.replace("not", "!")} ${astToTS(ast.expr)}`;
+		return `${ast.operator.replace("not", "!")}${astToTS(ast.expr)}`;
 
 	if (ast instanceof Variable) {
 		const decl = ast.constant ? "const" : "let";

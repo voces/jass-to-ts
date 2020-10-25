@@ -117,3 +117,27 @@ testProgram(
 		endglobals
 	`,
 );
+
+testProgram(
+	"ifthenelse",
+	`
+		function foo takes real a, real b returns real
+			if (a < b) then
+				return a
+			elseif (b < a) then
+				return b
+			else
+				return (a + b) / 2
+			endif
+		endfunction
+	`,
+);
+
+testProgram(
+	"not",
+	`
+		function foo takes nothing returns boolean
+			return not true
+		endfunction
+	`,
+);
