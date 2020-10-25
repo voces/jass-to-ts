@@ -9,7 +9,18 @@ const code = document.querySelector("code");
 const compressUrl = (string) => btoa(Pako.deflate(string, { to: "string" }));
 const decompressUrl = (string) => Pako.inflate(atob(string), { to: "string" });
 
+const INSTANT_THRESHOLD = 17;
+const RATE_LIMIT_THRESHOLD = 250;
+
+let lastDuration = 0;
+let lastTime = 0;
+let timeout;
+let calculating = false;
+let followUp = false;
+
 const calculate = () => {
+	calculating = true;
+	const start = Date.now();
 	try {
 		const jass = input.value || placeholder;
 		location.hash = compressUrl(jass);
@@ -17,6 +28,15 @@ const calculate = () => {
 		hljs.highlightBlock(code);
 	} catch (err) {
 		code.textContent = err;
+	}
+	lastTime = Date.now();
+	lastDuration = lastTime - start;
+	console.log(lastDuration);
+	calculating = false;
+
+	if (followUp) {
+		followUp = false;
+		onInput();
 	}
 };
 
@@ -39,4 +59,27 @@ input.setAttribute("placeholder", placeholder);
 calculate();
 if (initial === placeholder) input.value = "";
 
-input.addEventListener("keyup", calculate);
+const onInput = () => {
+	if (calculating) followUp = true;
+
+	// If it's fast, update instantly
+	if (lastDuration < INSTANT_THRESHOLD) return calculate();
+
+	// If it's moderate, update at most once every 250ms
+	if (lastDuration < RATE_LIMIT_THRESHOLD) {
+		clearTimeout(timeout);
+		if (lastTime + RATE_LIMIT_THRESHOLD < Date.now()) calculate();
+		else
+			timeout = setTimeout(
+				calculate,
+				lastTime + RATE_LIMIT_THRESHOLD - Date.now(),
+			);
+		return;
+	}
+
+	// If it's slow, update in 500ms
+	clearTimeout(timeout);
+	timeout = setTimeout(calculate, RATE_LIMIT_THRESHOLD * 2);
+};
+
+input.addEventListener("input", onInput);

@@ -1,14 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`debug statements 1`] = `
-"const MyFunc = (): void => {};
-"
-`;
+exports[`debug statements 1`] = `"const MyFunc = (): void => {};"`;
 
-exports[`empty function 1`] = `
-"const InitGlobals = (): void => {};
-"
-`;
+exports[`empty function 1`] = `"const InitGlobals = (): void => {};"`;
 
 exports[`globals 1`] = `
 "
@@ -29,44 +23,27 @@ exports[`multiline comments 1`] = `
  * @param arg1 Blah blah blah
  */
 
-const MyFunc = ( arg1: string ): void => {};
-"
+const MyFunc = (arg1: string): void => {};"
 `;
 
 exports[`simple 1`] = `
 "//comment
 let udg_blah: unit;
 
-const myFunc = ( i: number, b: boolean ): void => {
-
+const myFunc = (i: number, b: boolean): void => {
 	let someUnit = GetSummonedUnit();
-
-	if ( unit === null ) {
-
-		unit = CreateUnit( Player( 0 ), FourCC( \\"hfoo\\" ), 0, 0, 0 );
+	if (unit === null) {
+		unit = CreateUnit(Player(0), FourCC(\\"hfoo\\"), 0, 0, 0);
 		udg_blah = unit;
-
 	}
-
-
-	if ( R2I( GetUnitX( unit ) ) < i ) {
-
-		ShowUnit( unit, b )
-
+	if (R2I(GetUnitX(unit)) < i) {
+		ShowUnit(unit, b)
 	}
-
-
-	while ( true ) {
-
-		if ( i > 10 ) break;
+	while (true) {
+		if (i > 10) break;
 		i = i + 1;
-
 	}
-
-
-
-};
-"
+};"
 `;
 
 exports[`variables 1`] = `

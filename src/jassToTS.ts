@@ -56,7 +56,7 @@ const astToTS = (
 
 	if (ast instanceof Call)
 		return `${ast.name}(${
-			ast.args ? ` ${[...ast.args].map(astToTS).join(", ")} ` : ""
+			ast.args ? `${[...ast.args].map(astToTS).join(", ")}` : ""
 		})`;
 
 	if (ast instanceof Comment)
@@ -71,9 +71,9 @@ const astToTS = (
 
 	if (ast instanceof EmptyLine) return "";
 
-	if (ast instanceof ExitWhen) return `if ( ${astToTS(ast.data[0])} ) break;`;
+	if (ast instanceof ExitWhen) return `if (${astToTS(ast.data[0])}) break;`;
 
-	if (ast instanceof FourCC) return `FourCC( "${ast}" )`;
+	if (ast instanceof FourCC) return `FourCC("${ast}")`;
 
 	if (ast instanceof FuncRef) return ast.data;
 
@@ -90,18 +90,18 @@ const astToTS = (
 			.join("\n");
 
 	if (ast instanceof IfThenElse)
-		return `\nif ( ${astToTS(ast.condition)} ) {\n\n${astToTS(
-			ast.then,
-		)}\n\n}${ast.elses ? " " + ast.elses.map(astToTS).join(" ") : ""}\n`;
+		return `if (${astToTS(ast.condition)}) {\n${astToTS(ast.then)}\n}${
+			ast.elses ? " " + ast.elses.map(astToTS).join(" ") : ""
+		}`;
 
 	if (ast instanceof JASSFunction) {
 		if (ast.returns === undefined) isVoid = true;
 
 		const bodyContent = ast.statements ? astToTS(ast.statements) : "";
-		const body = bodyContent ? `\n\n${bodyContent}\n\n` : "";
+		const body = bodyContent ? `\n${bodyContent}\n` : "";
 		const r = `const ${ast.name} = (${
-			ast.params ? ` ${[...ast.params].map(astToTS).join(", ")} ` : ""
-		}): ${jassTypeToTypeScriptType(ast.returns || "void")} => {${body}};\n`;
+			ast.params ? `${[...ast.params].map(astToTS).join(", ")}` : ""
+		}): ${jassTypeToTypeScriptType(ast.returns || "void")} => {${body}};`;
 		isVoid = false;
 		return r;
 	}
@@ -113,12 +113,12 @@ const astToTS = (
 	}
 
 	if (ast instanceof Loop)
-		return `\nwhile ( true ) {\n\n${[...ast.statements]
+		return `while (true) {\n${[...ast.statements]
 			.map(astToTS)
 			.join("\n")
 			.split("\n")
 			.map((v) => (v ? "\t" + v : v))
-			.join("\n")}\n\n}\n\n`;
+			.join("\n")}\n}`;
 
 	if (ast instanceof Name) return ast.replace("this", "_this");
 
