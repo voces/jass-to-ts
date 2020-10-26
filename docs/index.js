@@ -23,7 +23,8 @@ const calculate = () => {
 	const start = Date.now();
 	try {
 		const jass = input.value || placeholder;
-		location.hash = compressUrl(jass);
+		if (jass !== placeholder) location.hash = compressUrl(jass);
+		else location.hash = "";
 		code.textContent = jassToTS(jass);
 		hljs.highlightBlock(code);
 	} catch (err) {
