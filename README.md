@@ -32,11 +32,9 @@ jass-to-ts generates the following TypeScript:
 
 ```typescript
 const my_func = (): void => {
-
-	let u = CreateUnit( Player( 0 ), FourCC( "hfoo" ), 0, 0, 0 );
-	RemoveUnit( u )
+	let u = CreateUnit(Player(0), FourCC("hfoo"), 0, 0, 0);
+	RemoveUnit(u)
 	u = null;
-
 };
 ```
 
@@ -49,7 +47,7 @@ If you're using `war3-types`, you may also find `null` issues in some function
 calls. For example:
 
 ```typescript
-TimerStart( myTimer, 15, false, null );
+TimerStart(myTimer, 15, false, null);
 ```
 
 The fourth argument, `handlerFunc`, expects a function, but we passed `null`.
