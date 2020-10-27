@@ -4,6 +4,25 @@ exports[`debug statements 1`] = `"const MyFunc = (): void => {};"`;
 
 exports[`empty function 1`] = `"const InitGlobals = (): void => {};"`;
 
+exports[`empty if 1`] = `
+"const foo = (): void => {
+	if (true) {}
+	else if (true) {}
+	else {}
+};"
+`;
+
+exports[`empty loop 1`] = `
+"const foo = (): void => {
+	while (true) {
+		while (true) {}
+		while (true) {
+			while (true) {}
+		}
+	}
+};"
+`;
+
 exports[`globals 1`] = `
 "
 // my numbers

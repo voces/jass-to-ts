@@ -62,12 +62,17 @@ const astToTS = (
 	if (ast instanceof Comment)
 		return ast.includes("\n") ? "/*" + ast + "*/" : "//" + ast;
 
-	if (ast instanceof Else) return `else {\n${astToTS(ast.statements)}\n}`;
+	if (ast instanceof Else) {
+		const bodyContent = ast.statements ? astToTS(ast.statements) : "";
+		const body = bodyContent ? `\n${bodyContent}\n` : "";
+		return `else {${body}}`;
+	}
 
-	if (ast instanceof ElseIf)
-		return `else if (${astToTS(ast.condition)}) {\n${astToTS(
-			ast.statements,
-		)}\n}`;
+	if (ast instanceof ElseIf) {
+		const bodyContent = ast.statements ? astToTS(ast.statements) : "";
+		const body = bodyContent ? `\n${bodyContent}\n` : "";
+		return `else if (${astToTS(ast.condition)}) {${body}}`;
+	}
 
 	if (ast instanceof EmptyLine) return "";
 
@@ -89,10 +94,34 @@ const astToTS = (
 			.filter(Boolean)
 			.join("\n");
 
-	if (ast instanceof IfThenElse)
-		return `if (${astToTS(ast.condition)}) {\n${astToTS(ast.then)}\n}${
-			ast.elses ? " " + ast.elses.map(astToTS).join(" ") : ""
+	if (ast instanceof IfThenElse) {
+		const bodyContent = ast.then ? astToTS(ast.then) : "";
+		const body = bodyContent ? `\n${bodyContent}\n` : "";
+		return `if (${astToTS(ast.condition)}) {${body}}${body ? "" : "\n"}${
+			ast.elses
+				? (body ? " " : "") +
+				  ast.elses
+						.map((ast, index, arr) => {
+							const main = astToTS(ast);
+
+							// If first else, return it
+							if (index === 0) return main;
+
+							// If previous else had no statements, it's {} and
+							// we should join with a new line
+							// Otherwise, it ends with an } on a new line, so
+							// just add a space
+							const prevStatements = arr[index - 1].statements;
+							return (
+								(!prevStatements || prevStatements.length === 0
+									? "\n"
+									: " ") + main
+							);
+						})
+						.join("")
+				: ""
 		}`;
+	}
 
 	if (ast instanceof JASSFunction) {
 		if (ast.returns === undefined) isVoid = true;
@@ -112,13 +141,11 @@ const astToTS = (
 		return `${name}${prop} = ${astToTS(ast.value)};`;
 	}
 
-	if (ast instanceof Loop)
-		return `while (true) {\n${[...ast.statements]
-			.map(astToTS)
-			.join("\n")
-			.split("\n")
-			.map((v) => (v ? "\t" + v : v))
-			.join("\n")}\n}`;
+	if (ast instanceof Loop) {
+		const bodyContent = ast.statements ? astToTS(ast.statements) : "";
+		const body = bodyContent ? `\n${bodyContent}\n` : "";
+		return `while (true) {${body}}`;
+	}
 
 	if (ast instanceof Name) return ast.replace("this", "_this");
 

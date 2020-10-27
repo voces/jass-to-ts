@@ -141,3 +141,31 @@ testProgram(
 		endfunction
 	`,
 );
+
+testProgram(
+	"empty if",
+	`
+		function foo takes nothing returns nothing
+			if true then
+			elseif true then
+			else
+			endif
+		endfunction
+	`,
+);
+
+testProgram(
+	"empty loop",
+	`
+		function foo takes nothing returns nothing
+			loop
+				loop
+				endloop
+				loop
+					loop
+					endloop
+				endloop
+			endloop
+		endfunction
+	`,
+);

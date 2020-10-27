@@ -28,7 +28,13 @@ const calculate = () => {
 		code.textContent = jassToTS(jass);
 		hljs.highlightBlock(code);
 	} catch (err) {
-		code.textContent = err;
+		if (
+			err.message.match(
+				/^invalid syntax at line [0-9]+ col 0:\n\n +fin\n/,
+			)
+		)
+			code.textContent = "Error: unexpected end of file";
+		else code.textContent = err;
 	}
 	lastTime = Date.now();
 	lastDuration = lastTime - start;
@@ -43,9 +49,9 @@ const calculate = () => {
 
 const placeholder = `//===========================================================================
 function DistanceBetweenPoints takes location locA, location locB returns real
-    local real dx = GetLocationX(locB) - GetLocationX(locA)
-    local real dy = GetLocationY(locB) - GetLocationY(locA)
-    return SquareRoot(dx * dx + dy * dy)
+	local real dx = GetLocationX(locB) - GetLocationX(locA)
+	local real dy = GetLocationY(locB) - GetLocationY(locA)
+	return SquareRoot(dx * dx + dy * dy)
 endfunction`;
 
 const getInitial = () => {
@@ -84,3 +90,9 @@ const onInput = () => {
 };
 
 input.addEventListener("input", onInput);
+input.addEventListener("keydown", (e) => {
+	if (e.code !== "Tab") return;
+
+	e.preventDefault();
+	document.execCommand("insertText", false, "\t");
+});
