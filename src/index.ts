@@ -18,5 +18,6 @@ fs.readFile(filePath, "utf-8", (err, res) => {
 		process.exit(1);
 	}
 
+	// eslint-disable-next-line no-console
 	console.log(jassToTS(res.replace(/\r/g, "")));
 });
