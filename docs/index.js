@@ -1,7 +1,7 @@
 /* global hljs */
 
 import { jassToTS } from "https://cdn.skypack.dev/jass-to-ts";
-import Pako from "https://cdn.skypack.dev/pako@2.0.2";
+import Pako from "https://cdn.skypack.dev/pako@1";
 
 const input = document.querySelector("textarea");
 const code = document.querySelector("code");
@@ -57,7 +57,12 @@ endfunction`;
 const getInitial = () => {
 	const hash = location.hash.slice(1);
 	if (!hash) return placeholder;
-	return decompressUrl(hash);
+	try {
+		return decompressUrl(hash);
+	} catch (err) {
+		console.log(hash);
+		console.error(err);
+	}
 };
 
 const initial = getInitial();
